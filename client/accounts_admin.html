@@ -1,8 +1,11 @@
 <template name="accountsAdmin">
     <div class="row accounts-search">
-        <div class="ol-sm-8 col-md-4 col-lg-4 col-md-offset-4 col-md-4 col-lg-offset-4 col-lg-4">
+        <!-- <div class="col-sm-8 col-md-4 col-lg-4 col-md-offset-4 col-md-4 col-lg-offset-4 col-lg-4"> -->
+        <div class="col-sm-4 col-md-4 col-lg-4">
+               <button class="btn btn-default" type="button" data-toggle="modal" href="#addUser"><span class="glyphicon glyphicon-plus"></span>Add User</button>
+        </div>
+        <div class="col-sm-offset-0 col-sm-8 col-md-offset-2 col-md-6 col-lg-offset-4 col-lg-4">
             <div class="input-group">
-                <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span>Add</button>
                 <input type="text" class="form-control search-input-filter" value="{{searchFilter}}">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
@@ -49,4 +52,5 @@
     {{> deleteAccountModal}}
     {{> infoAccountModal}}
     {{> updateAccountModal}}
+    {{> addUserModal}}
 </template>
