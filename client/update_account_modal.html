@@ -1,54 +1,84 @@
 <template name="updateAccountModal">
-	<div id="updateaccount" class="modal fade" tabindex="-1" data-width="760" style="display:none;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				{{> updateAccountModalInner}}
-			</div>
-		</div>
-	</div>
+  <div id="updateaccount" class="modal fade" tabindex="-1" data-width="760" style="display:none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        {{> updateAccountModalInner}}
+      </div>
+    </div>
+  </div>
 </template>
 
 <template name="updateAccountModalInner">
-	{{#with userInScope}}
-		<div class="modal-header">
-			<h4>Update {{email}}</h4>
-		</div>
-		<div class="modal-body">
-			<div class="form-group">
-				<div class="input-group">
-					<span class="input-group-addon">Name</span>
-					<input data-user-id="{{_id}}" class="form-control admin-user-info" name="profile.name" value="{{profile.name}}" placeholder="{{email}}">
-				</div>
-			</div>
-			{{#if roles}}
-				<ul class="list-group">
-					{{#each roles}}
-						<li class="list-group-item">
-							<button data-user-id="{{../_id}}" class="btn btn-danger btn-xs remove-role" type="button">Remove</button>
-							<span class="pull-right">{{this}}</span>
-						</li>
-					{{/each}}
-				</ul>
-			{{else}}
-				This account has no roles.
-			{{/if}}
-			{{#if unsetRoles}}
-			<div class="btn-group clearfix full-width">
-				<button type="button" class="btn btn-success dropdown-toggle pull-right" data-toggle="dropdown">
-					<span class="glyphicon glyphicon-plus"></span> Add Role 
-				</button>
-				<ul class="dropdown-menu pull-right" role="menu">
-					{{#each unsetRoles}}
-						<li><a href="#" class="add-role" data-user-id="{{../_id}}">{{this}}</a></li>
-					{{/each}}
-				</ul>
-			</div>
-			{{else}}
-			<em>All roles already set.</em>
-			{{/if}}
-		</div>
-		<div class="modal-footer">
-			<button type="button" data-dismiss="modal" class="btn btn-primary">Done</button>
-		</div>
-	{{/with}}
+  {{#with userInScope}}
+    <div class="modal-header">
+      <h4>Update {{email}}</h4>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+<!--        <div class="input-group">
+          <span class="input-group-addon">Name</span>
+          <input data-user-id="{{_id}}" class="form-control admin-user-info" name="profile.name" value="{{profile.name}}" placeholder="{{email}}">
+        </div> -->
+        <div class="input-group">
+          <span class="input-group-addon">Name</span>
+          <input data-user-id="{{_id}}" class="form-control admin-user-info" id="name" name="profile.name" placeholder="Required for All users" value="{{profile.name}}">
+          <span class="input-group-addon">Password</span>
+          <input class="form-control admin-user-info" name="password" placeholder="Only provide if changing">
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon">Email</span>
+          <input class="form-control admin-user-info" name="emails.0.address" value="{{email}}">
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon">Organization</span>
+          <input class="form-control admin-user-info" name="profile.organization" value="{{profile.organization}}" placeholder = "Required for Requesters">
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon">State</span>
+          <input class="form-control admin-user-info" name="profile.state" value="{{profile.state}}" >
+          <span class="input-group-addon">Postcode</span>
+          <input class="form-control admin-user-info" name="profile.postcode" value="{{profile.postcode}}" placeholder = "Required for Requesters">
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon">Suburb</span>
+          <input class="form-control admin-user-info" name="profile.suburb" value="{{profile.suburb}}" placeholder = "Required for Requesters">
+          <span class="input-group-addon">Phone No</span>
+          <input class="form-control admin-user-info" name="profile.contact" value="{{profile.contact}}" placeholder = "Required for Requesters">
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon">Delivery Address</span>
+          <input class="form-control admin-user-info" name="profile.delivery" value="{{profile.delivery}}" placeholder = "Required for Requesters">
+        </div>
+      </div>
+      {{#if roles}}
+        <ul class="list-group">
+          {{#each roles}}
+            <li class="list-group-item">
+              <button data-user-id="{{../_id}}" class="btn btn-danger btn-xs remove-role" type="button">Remove</button>
+              <span class="pull-right">{{this}}</span>
+            </li>
+          {{/each}}
+        </ul>
+      {{else}}
+        This account has no roles.
+      {{/if}}
+      {{#if unsetRoles}}
+      <div class="btn-group clearfix full-width">
+        <button type="button" class="btn btn-success dropdown-toggle pull-right" data-toggle="dropdown">
+          <span class="glyphicon glyphicon-plus"></span> Add Role 
+        </button>
+        <ul class="dropdown-menu pull-right" role="menu">
+          {{#each unsetRoles}}
+            <li><a href="#" class="add-role" data-user-id="{{../_id}}">{{this}}</a></li>
+          {{/each}}
+        </ul>
+      </div>
+      {{else}}
+      <em>All roles already set.</em>
+      {{/if}}
+    </div>
+    <div class="modal-footer">
+      <button type="button" data-dismiss="modal" class="btn btn-primary">Done</button>
+    </div>
+  {{/with}}
 </template>

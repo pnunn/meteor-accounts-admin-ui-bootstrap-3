@@ -95,8 +95,13 @@ Meteor.methods({
 		if (!user || !Roles.userIsInRole(user, ['admin']))
 			throw new Meteor.Error(401, "You need to be an admin to update a user.");
 
-		if (property !== 'profile.name')
-			throw new Meteor.Error(422, "Only 'name' is supported.");
+		// if (property !== 'profile.name')
+		// 	throw new Meteor.Error(422, "Only 'name' is supported.");
+		if(property === "password") {
+			//console.log("changing password");
+			Accounts.setPassword(id, value);
+			return;
+		}
 
 		obj = {};
 		obj[property] = value;
@@ -120,7 +125,7 @@ Meteor.methods({
         delivery: options.delivery
       }
     });
-    console.log("New User ID: " +id);
+    //console.log("New User ID: " +id);
     Meteor.users.update({_id: id}, {$set:{'emails.0.verified': true}});
     Roles.addUsersToRoles(id, options.role);
     Meteor.users.update({_id: id}, {$set:{'profile.Created': addedTime}});
