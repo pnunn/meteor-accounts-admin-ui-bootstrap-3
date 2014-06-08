@@ -102,5 +102,27 @@ Meteor.methods({
 		obj[property] = value;
 		Meteor.users.update({_id: id}, {$set: obj});
 
-	}
+	},
+
+	addUserAndRole: function(options) {
+    var addedTime = moment();
+    var id, user;
+
+    id = Accounts.createUser({
+      email: options.email,
+      password: options.password,
+      profile:{ name: options.name ,
+        contact: options.contact,
+        suburb: options.suburb,
+        state: options.state,
+        postcode: options.post,
+        organization: options.organization,
+        delivery: options.delivery
+      }
+    });
+    console.log("New User ID: " +id);
+    Meteor.users.update({_id: id}, {$set:{'emails.0.verified': true}});
+    Roles.addUsersToRoles(id, options.role);
+    Meteor.users.update({_id: id}, {$set:{'profile.Created': addedTime}});
+  }
 });
