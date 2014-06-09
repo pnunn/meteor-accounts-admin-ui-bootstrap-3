@@ -26,6 +26,10 @@
 				</li>
 				<li class="list-group-item"><strong>Email</strong><span class="pull-right">{{email}}</span></li>
 				<li class="list-group-item"><strong>ID</strong><span class="pull-right">{{_id}}</span></li>
+				<li class="list-group-item"><strong>Organization</strong><span class="pull-right">{{profile.organization}}</span></li>
+				<li class="list-group-item"><strong>Contact</strong><span class="pull-right">{{profile.contact}}</span></li>
+				<li class="list-group-item"><strong>Delivery</strong><span class="pull-right">{{profile.delivery}}</span></li>
+				<li class="list-group-item"><strong>Requests made</strong><span class="pull-right">{{noRequests _id}}</span></li>
 				{{#each rolePairs}}
 					<li class="list-group-item"><strong>{{key}}</strong><span class="pull-right">{{value}}</span></li>
 				{{/each}}
